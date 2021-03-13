@@ -33,6 +33,13 @@ $ git push heroku main
 $ heroku open
 ```
 
+## Configure DB remotely 
+
+Set url to .env.dist and then run the command: 
+```
+$ heroku config:set $(cat .env.dist)
+```
+
 ## Documentation
 
 For more information about using Java on Heroku, see these Dev Center articles:
