@@ -1,6 +1,5 @@
 package com.example.configure;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,8 +11,6 @@ public class DB {
 
     @Bean
     public DataSource getDataSource() {
-        Dotenv dotenv = Dotenv.load();
-
         System.out.println(System.getenv("JDBC_DATABASE_URL"));
 
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
