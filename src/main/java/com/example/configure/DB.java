@@ -14,11 +14,13 @@ public class DB {
     public DataSource getDataSource() {
         Dotenv dotenv = Dotenv.load();
 
+        System.out.println(System.getenv("JDBC_DATABASE_URL"));
+
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName("org.postgresql.Driver");
-        dataSourceBuilder.url(dotenv.get("JDBC_DATABASE_URL") + dotenv.get("JDBC_DATABASE"));
-        dataSourceBuilder.username(dotenv.get("JDBC_USERNAME"));
-        dataSourceBuilder.password(dotenv.get("JDBC_PASSWORD"));
+        dataSourceBuilder.url(System.getenv("JDBC_DATABASE_URL") + System.getenv("JDBC_DATABASE"));
+        dataSourceBuilder.username(System.getenv("JDBC_USERNAME"));
+        dataSourceBuilder.password(System.getenv("JDBC_PASSWORD"));
         return dataSourceBuilder.build();
     }
 }
