@@ -1,5 +1,6 @@
 package com.example.configure;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,13 +12,13 @@ public class DB {
 
     @Bean
     public DataSource getDataSource() {
-        System.out.println(System.getenv("JDBC_DATABASE_URL"));
+        Dotenv dotenv = Dotenv.load();
 
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName("org.postgresql.Driver");
-        dataSourceBuilder.url(System.getenv("JDBC_DATABASE_URL") + System.getenv("JDBC_DATABASE"));
-        dataSourceBuilder.username(System.getenv("JDBC_USERNAME"));
-        dataSourceBuilder.password(System.getenv("JDBC_PASSWORD"));
+        dataSourceBuilder.url(dotenv.get("JDBC_DATABASE_URL") + dotenv.get("JDBC_DATABASE"));
+        dataSourceBuilder.username(dotenv.get("JDBC_USERNAME"));
+        dataSourceBuilder.password(dotenv.get("JDBC_PASSWORD"));
         return dataSourceBuilder.build();
     }
 }
