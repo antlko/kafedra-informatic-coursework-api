@@ -11,13 +11,9 @@ public class DB {
 
     @Bean
     public DataSource getDataSource() {
-        System.out.println(System.getenv("JDBC_USERNAME"));
-
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName("org.postgresql.Driver");
-        dataSourceBuilder.url(System.getenv("JDBC_DATABASE_URL") + System.getenv("JDBC_DATABASE"));
-        dataSourceBuilder.username(System.getenv("JDBC_USERNAME"));
-        dataSourceBuilder.password(System.getenv("JDBC_PASSWORD"));
+        dataSourceBuilder.url(System.getenv("JDBC_DATABASE_URL"));
         return dataSourceBuilder.build();
     }
 }
