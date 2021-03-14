@@ -4,13 +4,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.text.DateFormat;
 
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "About")
-public class About {
+@Table(name = "partners")
+public class Partner {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -18,15 +17,9 @@ public class About {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "email")
-    private String email;
-
-    @Column(name = "phone")
-    private String phone;
-
     @Column(name = "description")
     private String description;
 
-    @Column(name = "date")
-    private DateFormat dateTime;
+    @Column(name = "link_to_company")
+    private String companyLink;
 }
