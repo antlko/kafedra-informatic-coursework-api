@@ -57,8 +57,8 @@ public class TestController {
     public @ResponseBody
     byte[] getImage(@PathVariable String fileName) throws IOException {
 
-        String uploadPath = System.getProperty("user.dir") + "\\images\\" + fileName;
-
+        String uploadPath = Paths.get("images/") + "/" + fileName;
+        
         File file = new File(uploadPath);
         InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 
