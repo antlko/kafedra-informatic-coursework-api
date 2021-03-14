@@ -37,7 +37,7 @@ public class TestController {
     public ImageEditorResponse uploadFile(@RequestParam MultipartFile image) throws IOException {
         String fileName = Objects.requireNonNull(image.getOriginalFilename());
 
-        Path uploadPath = Paths.get("images/");
+        Path uploadPath = Paths.get("src/main/resources/images/");
 
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
@@ -57,8 +57,8 @@ public class TestController {
     public @ResponseBody
     byte[] getImage(@PathVariable String fileName) throws IOException {
 
-        String uploadPath = Paths.get("images/") + "/" + fileName;
-        
+        String uploadPath = Paths.get("src/main/resources/images/") + "/" + fileName;
+
         File file = new File(uploadPath);
         InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 
