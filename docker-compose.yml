@@ -2,6 +2,7 @@ version: '3'
 
 services:
   database:
+    container_name: "uni_diploma"
     image: "postgres"
     ports:
       - "5432:5432"

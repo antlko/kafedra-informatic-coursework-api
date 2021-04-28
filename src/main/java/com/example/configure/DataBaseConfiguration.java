@@ -21,6 +21,6 @@ public class DataBaseConfiguration {
 
     @Bean
     public FlywayMigrationStrategy flywayMigrationStrategy() {
-        return Flyway::baseline;
+        return Flyway::migrate;
     }
 }

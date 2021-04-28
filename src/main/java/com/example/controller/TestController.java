@@ -20,7 +20,6 @@ import java.util.Objects;
 @RestController
 public class TestController {
 
-
     @Data
     class Entity {
         private String name;
@@ -74,6 +73,16 @@ public class TestController {
         }
 
         return targetArray;
+    }
+
+    @GetMapping("/admin/get")
+    public String getAdmin() {
+        return "Hi admin";
+    }
+
+    @GetMapping("/user/get")
+    public String getUser() {
+        return "Hi user";
     }
 
 }
