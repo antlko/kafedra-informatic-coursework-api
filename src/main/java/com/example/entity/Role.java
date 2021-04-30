@@ -4,12 +4,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
+@Table(name = "roles")
 @Data
 @NoArgsConstructor
-@Table(name = "news")
-public class News {
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -17,9 +18,4 @@ public class News {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "image_name")
-    private String imageName;
-
-    @Column(name = "main_text_name")
-    private String textName;
 }

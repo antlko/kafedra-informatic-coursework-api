@@ -1,43 +1,48 @@
 package com.example.service;
 
-import com.example.entity.RoleEntity;
-import com.example.entity.UserEntity;
-import com.example.repository.RoleEntityRepository;
-import com.example.repository.UserEntityRepository;
+import com.example.entity.Role;
+import com.example.entity.User;
+import com.example.repository.RoleRepository;
+import com.example.repository.UserRepository;
+import com.example.request.RegistrationRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
 
-    private final UserEntityRepository userEntityRepository;
+    private final UserRepository userRepository;
 
-    private final RoleEntityRepository roleEntityRepository;
+    private final RoleRepository roleRepository;
 
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserEntityRepository userEntityRepository, RoleEntityRepository roleEntityRepository, PasswordEncoder passwordEncoder) {
-        this.userEntityRepository = userEntityRepository;
-        this.roleEntityRepository = roleEntityRepository;
+    public UserService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
-    public UserEntity saveUser(UserEntity userEntity) {
-        RoleEntity userRole = roleEntityRepository.findByName("ROLE_USER");
-        userEntity.setRoleEntity(userRole);
-        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-        return userEntityRepository.save(userEntity);
+    public User saveUser(RegistrationRequest registrationRequest) {
+        User user = new User();
+        user.setPassword(registrationRequest.getPassword());
+        user.setLogin(registrationRequest.getLogin());
+
+        Role userRole = roleRepository.findByName("ROLE_USER");
+        user.setRole(userRole);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepository.save(user);
     }
 
-    public UserEntity findByLogin(String login) {
-        return userEntityRepository.findByLogin(login);
+    public User findByLogin(String login) {
+        return userRepository.findByLogin(login);
     }
 
-    public UserEntity findByLoginAndPassword(String login, String password) {
-        UserEntity userEntity = findByLogin(login);
-        if (userEntity != null) {
-            if (passwordEncoder.matches(password, userEntity.getPassword())) {
-                return userEntity;
+    public User findByLoginAndPassword(String login, String password) {
+        User user = findByLogin(login);
+        if (user != null) {
+            if (passwordEncoder.matches(password, user.getPassword())) {
+                return user;
             }
         }
         return null;

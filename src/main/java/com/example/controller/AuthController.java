@@ -2,7 +2,7 @@ package com.example.controller;
 
 
 import com.example.configure.jwt.JwtProvider;
-import com.example.entity.UserEntity;
+import com.example.entity.User;
 import com.example.request.AuthRequest;
 import com.example.request.RegistrationRequest;
 import com.example.response.AuthResponse;
@@ -27,18 +27,18 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public UserEntity registerUser(@RequestBody @Valid RegistrationRequest registrationRequest) {
-        UserEntity user = new UserEntity();
-        user.setPassword(registrationRequest.getPassword());
-        user.setLogin(registrationRequest.getLogin());
-        return userService.saveUser(user);
+    public User registerUser(@RequestBody @Valid RegistrationRequest registrationRequest) throws Exception {
+        try {
+            return userService.saveUser(registrationRequest);
+        } catch (Exception ex) {
+            throw new Exception(ex.getMessage());
+        }
     }
 
     @PostMapping("/auth")
-    public @ResponseBody
-    AuthResponse auth(@RequestBody AuthRequest request) {
-        UserEntity userEntity = userService.findByLoginAndPassword(request.getLogin(), request.getPassword());
-        String token = jwtProvider.generateToken(userEntity.getLogin());
+    public @ResponseBody AuthResponse auth(@RequestBody AuthRequest request) {
+        User user = userService.findByLoginAndPassword(request.getLogin(), request.getPassword());
+        String token = jwtProvider.generateToken(user.getLogin());
         return new AuthResponse(token);
     }
 }
