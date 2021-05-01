@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 import static org.springframework.util.StringUtils.hasText;
+
 @Component
 @Log
 public class JwtFilter extends GenericFilterBean {

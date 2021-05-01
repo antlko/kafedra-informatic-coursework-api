@@ -8,10 +8,25 @@ services:
       - "5432:5432"
     env_file:
       - .env
-#    networks:
-#      - "common_net_inf"
+    networks:
+      - "common_net_inf"
 
-#networks:
-#  common_net_inf:
-#    external:
-#      name: "common_net_inf"
+  backend:
+    image: 'docker-spring-boot:latest'
+    build:
+      context: .
+    container_name: "backend"
+    ports:
+      - "5000:5000"
+    networks:
+      - "common_net_inf"
+    environment:
+      - DB_ADDR=uni_diploma
+      - DB_NAME=postgres
+      - DB_USER=postgres
+      - DB_PASS=postgres
+
+networks:
+  common_net_inf:
+    external:
+      name: "common_net_inf"

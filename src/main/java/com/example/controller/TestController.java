@@ -25,7 +25,7 @@ public class TestController {
         private String name;
     }
 
-    @GetMapping("/test")
+    @GetMapping("/test2")
     public Entity getJSONEntity() {
         Entity entity = new Entity();
         entity.setName("TestName");
