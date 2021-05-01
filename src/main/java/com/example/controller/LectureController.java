@@ -1,20 +1,17 @@
 package com.example.controller;
 
 import com.example.entity.Lecture;
-import com.example.exceptions.ResourceNotFoundException;
 import com.example.service.LectureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.List;
 
+@CrossOrigin
 @RestController
-@RequestMapping("/teachers")
 public class LectureController {
+
     private final LectureService lectureService;
 
     @Autowired
@@ -22,10 +19,19 @@ public class LectureController {
         this.lectureService = lectureService;
     }
 
-    @GetMapping("/findAll")
+    @GetMapping( "lectures/findAll")
     public ResponseEntity<List<Lecture>> findAllLectures() throws Exception {
         try {
             return lectureService.findAllLectures();
+        } catch (Exception ex) {
+            throw new Exception(ex.getMessage());
+        }
+    }
+
+    @PostMapping("/lectures")
+    public ResponseEntity<Lecture> saveLecture(@RequestBody Lecture lecture) throws Exception {
+        try {
+            return lectureService.save(lecture);
         } catch (Exception ex) {
             throw new Exception(ex.getMessage());
         }

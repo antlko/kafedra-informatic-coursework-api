@@ -3,6 +3,7 @@ package com.example.controller;
 
 import com.example.configure.jwt.JwtProvider;
 import com.example.entity.User;
+import com.example.exceptions.ResourceNotFoundException;
 import com.example.request.AuthRequest;
 import com.example.request.RegistrationRequest;
 import com.example.response.AuthResponse;
@@ -38,8 +39,11 @@ public class AuthController {
     }
 
     @PostMapping("/auth")
-    public @ResponseBody AuthResponse auth(@RequestBody AuthRequest request) {
+    public @ResponseBody AuthResponse auth(@RequestBody AuthRequest request) throws ResourceNotFoundException {
         User user = userService.findByLoginAndPassword(request.getLogin(), request.getPassword());
+        if (user == null) {
+            throw new ResourceNotFoundException("User not found!");
+        }
         String token = jwtProvider.generateToken(user.getLogin());
         return new AuthResponse(token);
     }

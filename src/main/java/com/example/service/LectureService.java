@@ -24,6 +24,11 @@ public class LectureService {
         if (lectures.isEmpty()) {
             throw new ResourceNotFoundException("You do not have any teachers");
         }
-        return new ResponseEntity<List<Lecture>>(lectures, HttpStatus.OK);
+        return new ResponseEntity<>(lectures, HttpStatus.OK);
+    }
+
+    public ResponseEntity<Lecture> save(Lecture lecture) {
+        Lecture savedLecture = lectureRepository.save(lecture);
+        return new ResponseEntity<>(savedLecture, HttpStatus.OK);
     }
 }
