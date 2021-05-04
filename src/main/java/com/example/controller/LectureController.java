@@ -28,7 +28,7 @@ public class LectureController {
         }
     }
 
-    @PostMapping("/lectures")
+    @PostMapping("/admin/lectures")
     public ResponseEntity<Lecture> saveLecture(@RequestBody Lecture lecture) throws Exception {
         try {
             return lectureService.save(lecture);
