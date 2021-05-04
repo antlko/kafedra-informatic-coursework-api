@@ -19,7 +19,7 @@ public class LectureController {
         this.lectureService = lectureService;
     }
 
-    @GetMapping( "lectures/findAll")
+    @GetMapping( "/lectures/findAll")
     public ResponseEntity<List<Lecture>> findAllLectures() throws Exception {
         try {
             return lectureService.findAllLectures();
