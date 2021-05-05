@@ -6,9 +6,9 @@ import java.util.Date;
 
 @Getter
 public class ExceptionsDetails {
-    private Date timestamp;
-    private int status;
-    private String message;
+    private final Date timestamp;
+    private final int status;
+    private final String message;
 
     public ExceptionsDetails(Date timestamp, int status, String message) {
         super();

@@ -19,8 +19,8 @@ public class TeacherController {
         this.teacherService = teacherService;
     }
 
-    @GetMapping("/teachers/findAll")
-    public ResponseEntity<List<Teacher>> findAllLectures() throws Exception {
+    @GetMapping("/teachers")
+    public ResponseEntity<List<Teacher>> findAllTeachers() throws Exception {
         try {
             return teacherService.findAllLectures();
         } catch (Exception ex) {
@@ -29,11 +29,22 @@ public class TeacherController {
     }
 
     @PostMapping("/admin/teacher")
-    public ResponseEntity<Teacher> saveLecture(@RequestBody Teacher teacher) throws Exception {
+    public ResponseEntity<Teacher> saveTeacher(@RequestBody Teacher teacher) throws Exception {
         try {
             return teacherService.save(teacher);
         } catch (Exception ex) {
             throw new Exception(ex.getMessage());
         }
     }
+
+    @GetMapping("/teacher")
+    public ResponseEntity<Teacher> getTeacher(@RequestParam Long id) throws Exception {
+        return teacherService.findByID(id);
+    }
+
+    @DeleteMapping("/admin/teacher/delete")
+    public ResponseEntity<Teacher> deleteTeacher(@RequestParam Long id) throws Exception {
+        return teacherService.delete(id);
+    }
+
 }

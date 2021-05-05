@@ -31,4 +31,21 @@ public class TeacherService {
         Teacher savedTeacher = teacherRepository.save(teacher);
         return new ResponseEntity<>(savedTeacher, HttpStatus.OK);
     }
+
+    public ResponseEntity<Teacher> findByID(Long id) throws ResourceNotFoundException {
+        return new ResponseEntity<>(
+                teacherRepository.findById(id)
+                        .orElseThrow(() -> new ResourceNotFoundException("Teacher not found!")),
+                HttpStatus.OK
+        );
+    }
+
+    public ResponseEntity<Teacher> delete(Long id) throws ResourceNotFoundException {
+        Teacher teacher = teacherRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Teacher not found!"));
+
+        teacherRepository.delete(teacher);
+        return new ResponseEntity<>(teacher, HttpStatus.OK);
+    }
 }
