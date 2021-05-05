@@ -1,9 +1,9 @@
 package com.example.repository;
 
-import com.example.entity.Lecture;
+import com.example.entity.Teacher;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface LectureRepository extends JpaRepository<Lecture, Long> {
+public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 }

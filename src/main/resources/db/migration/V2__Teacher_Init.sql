@@ -1,4 +1,4 @@
-CREATE TABLE lectures
+CREATE TABLE teachers
 (
     id          serial PRIMARY KEY,
     photo       text,
