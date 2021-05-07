@@ -45,4 +45,13 @@ public class CustomPageInfoService {
         return new ResponseEntity<>(responseList, HttpStatus.OK);
 
     }
+
+    public ResponseEntity<CustomPageInfo> delete(String url) throws ResourceNotFoundException {
+        CustomPageInfo page = customPagesInfoRepository
+                .findByUrl(url)
+                .orElseThrow(() -> new ResourceNotFoundException("Page not found!"));
+
+        customPagesInfoRepository.delete(page);
+        return new ResponseEntity<>(page, HttpStatus.OK);
+    }
 }

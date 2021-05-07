@@ -9,4 +9,6 @@ import java.util.Optional;
 @Repository
 public interface CustomPagesInfoRepository extends JpaRepository<CustomPageInfo, Long> {
     Optional<CustomPageInfo> getByUrl(String url);
+
+    Optional<CustomPageInfo> findByUrl(String url);
 }

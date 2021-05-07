@@ -27,6 +27,14 @@ public class CustomPageInfoController {
         return customPageInfoService.save(customPageInfo);
     }
 
+    @DeleteMapping("/admin/custompage")
+    public ResponseEntity<CustomPageInfo> deleteCustomPage(
+            @RequestParam(name = "url") String url
+    ) throws UnsupportedEncodingException, ResourceNotFoundException {
+        URLDecoder.decode(url, StandardCharsets.UTF_8.toString());
+        return customPageInfoService.delete(url);
+    }
+
     @GetMapping("/admin/custompages")
     public ResponseEntity<List<CustomPageInfoResponse>> getAllCustomPages() {
         return customPageInfoService.findAll();
